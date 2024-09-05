@@ -1,4 +1,4 @@
-package data.pet.model;
+package data.pet.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @NoArgsConstructor
@@ -15,8 +14,8 @@ import java.util.UUID;
 @Data
 public class Pet {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     private int pet_image_id;
 
@@ -35,7 +34,7 @@ public class Pet {
 
     @ManyToOne
     @JoinColumn(name = "health_type")
-    private Health_type healthType;
+    private HealthType healthType;
 
     @Column(name = "date_of_birth", nullable = false)
     @UpdateTimestamp
@@ -54,5 +53,16 @@ public class Pet {
     @ManyToOne
     @JoinColumn(name = "pet_type_id")
     private PetType petTypeId;
-    
+
+    @ManyToOne
+    @JoinColumn(name = "colour_id")
+    private Colour colour;
+
+    @ManyToOne
+    @JoinColumn(name = "hair_id")
+    private Hair hair;
+
+    @ManyToOne
+    @JoinColumn(name = "size_id")
+    private Size size;
 }
