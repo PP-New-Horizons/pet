@@ -14,7 +14,7 @@ public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(unique = true, nullable = false, length = 256)
     @EqualsAndHashCode.Include

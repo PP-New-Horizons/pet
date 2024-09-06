@@ -14,7 +14,7 @@ public class HealthType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(unique = true, nullable = false)
     @EqualsAndHashCode.Include
