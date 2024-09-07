@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class User {
+public class UserProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
