@@ -56,7 +56,7 @@ public class Pet {
 
     @ManyToOne
     @JoinColumn(name = "colour_id")
-    private Colour colour;
+    private Color color;
 
     @ManyToOne
     @JoinColumn(name = "hair_id")

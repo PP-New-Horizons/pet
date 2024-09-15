@@ -10,7 +10,7 @@ import lombok.*;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Colour {
+public class Color {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
