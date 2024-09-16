@@ -6,7 +6,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "colour")
+@Table(name = "color")
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)

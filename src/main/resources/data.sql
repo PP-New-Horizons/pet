@@ -2,11 +2,11 @@ INSERT INTO gender (name) VALUES ('Мужской') ON CONFLICT (name) DO NOTHIN
 INSERT INTO gender (name) VALUES ('Женский') ON CONFLICT (name) DO NOTHING;
 
 
-INSERT INTO colour (name) VALUES ('Блондин') ON CONFLICT (name) DO NOTHING;
-INSERT INTO colour (name) VALUES ('Брюнет') ON CONFLICT (name) DO NOTHING;
-INSERT INTO colour (name) VALUES ('Рыжий') ON CONFLICT (name) DO NOTHING;
-INSERT INTO colour (name) VALUES ('Шатен') ON CONFLICT (name) DO NOTHING;
-INSERT INTO colour (name) VALUES ('Пёстрый') ON CONFLICT (name) DO NOTHING;
+INSERT INTO color (name) VALUES ('Блондин') ON CONFLICT (name) DO NOTHING;
+INSERT INTO color (name) VALUES ('Брюнет') ON CONFLICT (name) DO NOTHING;
+INSERT INTO color (name) VALUES ('Рыжий') ON CONFLICT (name) DO NOTHING;
+INSERT INTO color (name) VALUES ('Шатен') ON CONFLICT (name) DO NOTHING;
+INSERT INTO color (name) VALUES ('Пёстрый') ON CONFLICT (name) DO NOTHING;
 
 
 INSERT INTO health_type (name) VALUES ('С ограниченными возможностями') ON CONFLICT (name) DO NOTHING;

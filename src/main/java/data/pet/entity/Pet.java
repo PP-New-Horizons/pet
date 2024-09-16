@@ -55,7 +55,7 @@ public class Pet {
     private PetType petTypeId;
 
     @ManyToOne
-    @JoinColumn(name = "colour_id")
+    @JoinColumn(name = "color_id")
     private Color color;
 
     @ManyToOne
