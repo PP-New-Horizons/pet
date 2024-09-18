@@ -17,4 +17,6 @@ public interface HairRepo extends JpaRepository<Hair,Long> {
     @Override
     void delete(@NonNull Hair entity);
 
+
+
 }

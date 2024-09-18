@@ -10,8 +10,12 @@ public interface ColorRepo extends JpaRepository<Color, Long> {
     @Override
     @NonNull
     <S extends Color> S save(@NonNull S entity);
+
     @Override
     @NonNull
     List<Color> findAll();
+
+    @NonNull
+    Color findById(long id);
 
 }
