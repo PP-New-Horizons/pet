@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -17,19 +18,21 @@ public class Pet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private int pet_image_id;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pet_id")
+    private List<Image> images;
 
-    @Column(columnDefinition = "VARCHAR",name = "name")
+    @Column(columnDefinition = "VARCHAR", name = "name")
     String name;
 
     @ManyToOne
     @JoinColumn(name = "gender_id")
     private Gender gender;
 
-    @Column(columnDefinition = "VARCHAR",name = "description")
+    @Column(columnDefinition = "VARCHAR", name = "description")
     String description;
 
-    @Column(columnDefinition = "VARCHAR",name = "history")
+    @Column(columnDefinition = "VARCHAR", name = "history")
     String history;
 
     @ManyToOne

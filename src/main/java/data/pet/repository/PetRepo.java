@@ -13,6 +13,9 @@ public interface PetRepo extends JpaRepository<Pet, Long> {
     @NonNull
     List<Pet> findAll();
 
+    @NonNull
+    List<Pet> findAllPetsByTypeId(Long id);
+
     @Override
     @NonNull
     <S extends Pet> S save(@NonNull S entity);

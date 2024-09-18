@@ -18,4 +18,7 @@ public interface ImageRepo extends JpaRepository<Image,Long> {
 
     @Override
     void delete(@NonNull Image entity);
+
+    @NonNull
+    List<Image> findAllByPetId(Long id);
 }
