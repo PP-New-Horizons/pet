@@ -1,5 +1,6 @@
 package data.pet.dto.request;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 @NoArgsConstructor
@@ -7,6 +8,8 @@ import lombok.*;
 @Getter
 @Setter
 @Builder(toBuilder = true)
+@Schema(description = "Tutorial Model Information")
+
 public class PetFilterDto {
 
     private Integer petTypeId;
