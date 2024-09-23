@@ -65,4 +65,9 @@ public class Pet {
     @ManyToOne
     @JoinColumn(name = "size_id")
     private Size size;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "adoption_form_id", nullable = true)
+    private FormForAdoption formForAdoption;
+
 }
