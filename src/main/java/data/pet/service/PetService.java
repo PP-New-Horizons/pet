@@ -1,5 +1,6 @@
 package data.pet.service;
 
+import data.pet.dto.response.PetDto;
 import data.pet.dto.request.PetFilterDto;
 import data.pet.entity.Pet;
 
@@ -13,5 +14,5 @@ public interface PetService {
 
     List<Pet> getPetsByFilter(PetFilterDto petFilterDto);
 
-    Optional<Pet> getPetById(Long id);
+    Optional<PetDto> getPetById(Long id);
 }

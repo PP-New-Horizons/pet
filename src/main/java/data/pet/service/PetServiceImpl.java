@@ -1,5 +1,6 @@
 package data.pet.service;
 
+import data.pet.dto.response.PetDto;
 import data.pet.dto.request.PetFilterDto;
 import data.pet.entity.Pet;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public Optional<Pet> getPetById(Long id) {
+    public Optional<PetDto> getPetById(Long id) {
         return Optional.empty();
     }
 }

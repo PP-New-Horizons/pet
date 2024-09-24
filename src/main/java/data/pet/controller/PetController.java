@@ -1,5 +1,6 @@
 package data.pet.controller;
 
+import data.pet.dto.response.PetDto;
 import data.pet.dto.request.PetFilterDto;
 import data.pet.entity.Pet;
 import data.pet.service.PetService;
@@ -90,7 +91,7 @@ public class PetController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Get a pet by id")
-    public ResponseEntity<Pet> getPetById(
+    public ResponseEntity<PetDto> getPetById(
             @PathVariable Long id
     ) {
         return ResponseEntity.status(HttpStatus.OK).body(petService.getPetById(id).get());
