@@ -29,6 +29,9 @@ public class Pet {
     @JoinColumn(name = "gender_id")
     private Gender gender;
 
+    /*@Column(name = "age")
+    Integer age;*/
+
     @Column(columnDefinition = "VARCHAR", name = "description")
     String description;
 
@@ -49,6 +52,9 @@ public class Pet {
 
     @Column(name = "is_booked")
     private boolean isBooked;
+
+    @Column(name = "is_adopted")
+    private boolean isAdopted;
 
     @Column(name = "breed")
     private boolean breed;
