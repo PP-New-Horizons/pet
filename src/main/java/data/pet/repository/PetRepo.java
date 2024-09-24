@@ -3,6 +3,8 @@ package data.pet.repository;
 import data.pet.entity.Pet;
 import lombok.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +16,8 @@ public interface PetRepo extends JpaRepository<Pet, Long> {
     List<Pet> findAll();
 
     @NonNull
-    List<Pet> findAllPetsByTypeId(Long id);
+    @Query("SELECT p FROM Pet p WHERE p.petTypeId.id = :typeId")
+    List<Pet> findAllPetsByTypeId(@Param("typeId") Long typeId);
 
     @Override
     @NonNull
@@ -27,6 +30,6 @@ public interface PetRepo extends JpaRepository<Pet, Long> {
     @NonNull
     Optional<Pet> findById(@NonNull Long id);
 
-    @NonNull
-    List<Pet> findAllByPetType();
+//    @NonNull
+//    List<Pet> findAllByPetType();
 }
