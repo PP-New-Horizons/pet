@@ -32,10 +32,10 @@ public class FormForAdoption {
     @JoinColumn(name = "pet_id", referencedColumnName = "id")
     private Pet pet;
 
-    private LocalDateTime dateOfCreated;
+    private LocalDateTime createdAt;
 
     @PrePersist
     protected void onCreate() {
-        dateOfCreated = LocalDateTime.now();
+        createdAt = LocalDateTime.now();
     }
 }

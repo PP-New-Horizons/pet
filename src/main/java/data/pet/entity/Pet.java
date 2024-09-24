@@ -70,4 +70,7 @@ public class Pet {
     @JoinColumn(name = "adoption_form_id", nullable = true)
     private FormForAdoption formForAdoption;
 
+    @Column(name = "isAdopted")
+    private boolean isAdopted;
+
 }
