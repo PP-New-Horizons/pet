@@ -38,8 +38,8 @@ public interface PetRepo extends JpaRepository<Pet, Long> {
                                 @Param("sizeId") Integer sizeId);
 
     @NonNull
-    List<Pet> findAllPetsByTypeId(Long id);
-
+    @Query("SELECT p FROM Pet p WHERE p.petTypeId.id = :typeId")
+    List<Pet> findAllPetsByTypeId(@Param("typeId") Long typeId);
 
     @Override
     @NonNull
@@ -52,6 +52,6 @@ public interface PetRepo extends JpaRepository<Pet, Long> {
     @NonNull
     Optional<Pet> findById(@NonNull Long id);
 
-    @NonNull
-    List<Pet> findAllByPetType();
+//    @NonNull
+//    List<Pet> findAllByPetType();
 }
