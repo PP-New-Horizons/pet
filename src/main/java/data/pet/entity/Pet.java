@@ -22,7 +22,7 @@ public class Pet {
     @JoinColumn(name = "pet_id")
     private List<Image> images;
 
-    @Column(columnDefinition = "VARCHAR", name = "name")
+    @Column(columnDefinition = "VARCHAR",name = "name")
     String name;
 
     @ManyToOne
@@ -35,7 +35,7 @@ public class Pet {
     @Column(columnDefinition = "VARCHAR", name = "description")
     String description;
 
-    @Column(columnDefinition = "VARCHAR", name = "history")
+    @Column(columnDefinition = "VARCHAR",name = "history")
     String history;
 
     @ManyToOne

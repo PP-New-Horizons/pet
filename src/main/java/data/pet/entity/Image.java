@@ -24,8 +24,7 @@ public class Image {
     @EqualsAndHashCode.Include
     private String path;
 
-    @Column(unique = true, nullable = false, length = 1024)
     @EqualsAndHashCode.Include
-    private String previewPath;
+    private boolean isAvatar;
 
 }
