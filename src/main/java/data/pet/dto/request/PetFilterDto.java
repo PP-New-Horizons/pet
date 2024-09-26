@@ -13,15 +13,17 @@ public class PetFilterDto {
 
     private Integer genderId;
 
-    private Integer startIntervalAge;
+    private Integer minAgeInMonths;
 
-    private Integer endIntervalAge;
+    private Integer maxAgeInMonths;
 
     private Integer healthId;
 
     private Integer hairId;
 
     private Boolean breed;
+
+    private Integer color;
 
     private Integer sizeId;
 }

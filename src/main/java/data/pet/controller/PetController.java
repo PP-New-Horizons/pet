@@ -3,7 +3,7 @@ package data.pet.controller;
 import data.pet.dto.response.PetDto;
 import data.pet.dto.request.PetFilterDto;
 import data.pet.entity.Pet;
-import data.pet.service.PetService;
+import data.pet.services.interfaces.PetService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -53,11 +53,11 @@ public class PetController {
                     example = "1")
             @RequestParam(required = false) Integer genderId,
             @Parameter(
-                    description = "Начало интервала возраста в годах включительно",
+                    description = "Начало интервала возраста в месяцах включительно",
                     example = "0")
-            @RequestParam(required = false) Integer startIntervalAge,
+            @RequestParam(required = false) Integer minAgeInMonths,
             @Parameter(
-                    description = "Конец интервала возраста в годах включительно",
+                    description = "Конец интервала возраста в месяцах включительно",
                     example = "15")
             @RequestParam(required = false) Integer endIntervalAge,
             @Parameter(
@@ -71,7 +71,7 @@ public class PetController {
             @Parameter(
                     description = "Порода, true - есть, false - нет",
                     example = "false")
-            @RequestParam(required = false) Boolean greed,
+            @RequestParam(required = false) Boolean breed,
             @Parameter(
                     description = "id=1 - Большой, id=2 - Средний, id=3 - Маленький",
                     example = "1")
@@ -79,11 +79,11 @@ public class PetController {
         PetFilterDto petFilterDto = PetFilterDto.builder()
                 .petTypeId(petTypeId)
                 .genderId(genderId)
-                .startIntervalAge(startIntervalAge)
-                .endIntervalAge(endIntervalAge)
+                .minAgeInMonths(minAgeInMonths)
+                .maxAgeInMonths(minAgeInMonths)
                 .healthId(healthId)
                 .hairId(hairId)
-                .greed(greed)
+                .breed(breed)
                 .sizeId(sizeId)
                 .build();
         return ResponseEntity.status(HttpStatus.OK).body(petService.getPetsByFilter(petFilterDto));
