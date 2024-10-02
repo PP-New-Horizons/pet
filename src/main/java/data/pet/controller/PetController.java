@@ -1,8 +1,7 @@
 package data.pet.controller;
 
-import data.pet.dto.response.PetDto;
 import data.pet.dto.request.PetFilterDto;
-import data.pet.entity.Pet;
+import data.pet.dto.response.PetDto;
 import data.pet.services.interfaces.PetService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -25,25 +24,25 @@ public class PetController {
 
     @GetMapping
     @Operation(summary = "Get a list of all pets")
-    public ResponseEntity<List<Pet>> getAllPets() {
+    public ResponseEntity<List<PetDto>> getAllPets() {
         return ResponseEntity.status(HttpStatus.OK).body(petService.getAllPets());
     }
 
     @GetMapping("/cats")
     @Operation(summary = "Get a list of all cats")
-    public ResponseEntity<List<Pet>> getAllCats() {
+    public ResponseEntity<List<PetDto>> getAllCats() {
         return ResponseEntity.status(HttpStatus.OK).body(petService.getPetsByTypeId(1L));
     }
 
     @GetMapping("/dogs")
     @Operation(summary = "Get a list of all dogs")
-    public ResponseEntity<List<Pet>> getAllDogs() {
+    public ResponseEntity<List<PetDto>> getAllDogs() {
         return ResponseEntity.status(HttpStatus.OK).body(petService.getPetsByTypeId(2L));
     }
 
     @GetMapping("/filter")
     @Operation(summary = "Get a list of pets by filter")
-    public ResponseEntity<List<Pet>> getPetsByFilters(
+    public ResponseEntity<List<PetDto>> getPetsByFilters(
             @Parameter(
                     description = "id=1 - Кошка, id=2 - Собака",
                     example = "1")
@@ -73,6 +72,10 @@ public class PetController {
                     example = "false")
             @RequestParam(required = false) Boolean breed,
             @Parameter(
+                    description = "id=1 - Брюнет, id=2 - Рыжий, id=3 - Шатен, id=4 - Пёстрый",
+                    example = "1")
+            @RequestParam(required = false) Integer colorId,
+            @Parameter(
                     description = "id=1 - Большой, id=2 - Средний, id=3 - Маленький",
                     example = "1")
             @RequestParam(required = false) Integer sizeId) {
@@ -84,6 +87,7 @@ public class PetController {
                 .healthId(healthId)
                 .hairId(hairId)
                 .breed(breed)
+                .color(colorId)
                 .sizeId(sizeId)
                 .build();
         return ResponseEntity.status(HttpStatus.OK).body(petService.getPetsByFilter(petFilterDto));

@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PetService {
-    List<Pet> getAllPets();
-    List<Pet> getAllPetsForAdmin();
-    List<Pet> getPetsByTypeId(Long typeId);
-    List<Pet> getPetsByFilter(PetFilterDto petFilterDto);
+    List<PetDto> getAllPets();
+    List<PetDto> getAllPetsForAdmin();
+    List<PetDto> getPetsByTypeId(Long typeId);
+    List<PetDto> getPetsByFilter(PetFilterDto petFilterDto);
     Optional<PetDto> getPetById(Long id);
 }
