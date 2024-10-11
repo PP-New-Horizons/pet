@@ -26,8 +26,8 @@ public interface PetRepo extends JpaRepository<Pet, Long> {
     @Query("SELECT p FROM Pet p WHERE " +
             "(:petTypeId IS NULL OR p.petTypeId.id = :petTypeId) AND " +
             "(:genderId IS NULL OR p.gender.id = :genderId) AND " +
-            "(:minBirthDate IS NULL OR p.dateOfBirth >= :minBirthDate) AND " +
-            "(:maxBirthDate IS NULL OR p.dateOfBirth <= :maxBirthDate) AND " +
+            "(p.dateOfBirth >= :minBirthDate) AND " +
+            "(p.dateOfBirth <= :maxBirthDate) AND " +
             "(:healthId IS NULL OR p.healthType.id = :healthId) AND " +
             "(:breed IS NULL OR p.breed = :breed) AND " +
             "(:hairId IS NULL OR p.hair.id = :hairId) AND " +

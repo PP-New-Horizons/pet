@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class Pet {
 
     @Column(name = "date_of_birth", nullable = false)
     @UpdateTimestamp
-    private LocalDateTime dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @Column(name = "created_at", nullable = false)
     @UpdateTimestamp

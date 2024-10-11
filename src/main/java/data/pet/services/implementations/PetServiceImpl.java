@@ -12,7 +12,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.List;
 import java.util.Optional;
@@ -76,14 +75,20 @@ public class PetServiceImpl implements PetService {
         return petDto;
     }
 
-    private Integer calculateAgeInMonths(LocalDateTime dateOfBirth) {
-        return Period.between(dateOfBirth.toLocalDate(), LocalDate.now()).getMonths();
+    private Integer calculateAgeInMonths(LocalDate dateOfBirth) {
+        return Period.between(dateOfBirth, LocalDate.now()).getMonths();
     }
 
     @Override
     public List<PetDto> getPetsByFilter(PetFilterDto petFilter) {
-        LocalDate minBirthDate = calculateBirthDateFromAgeInMonths(petFilter.getMinAgeInMonths());
-        LocalDate maxBirthDate = calculateBirthDateFromAgeInMonths(petFilter.getMaxAgeInMonths());
+        LocalDate maxBirthDate = calculateBirthDateFromAgeInMonths(petFilter.getMinAgeInMonths());
+        LocalDate minBirthDate = calculateBirthDateFromAgeInMonths(petFilter.getMaxAgeInMonths());
+        if (maxBirthDate == null) {
+            maxBirthDate = LocalDate.now();
+        }
+        if (minBirthDate == null) {
+            minBirthDate = LocalDate.of(1900, 1, 1);
+        }
 
         return petRepo.findPetsByFilters(
                         petFilter.getPetTypeId(),
@@ -101,10 +106,9 @@ public class PetServiceImpl implements PetService {
     }
 
     private LocalDate calculateBirthDateFromAgeInMonths(Integer ageInMonths) {
-        if (ageInMonths == null) {
-            return null;
-        }
-        return LocalDate.now().minusMonths(ageInMonths);
+        return Optional.ofNullable(ageInMonths)
+                .map(LocalDate.now()::minusMonths)
+                .orElse(null);
     }
 
 }

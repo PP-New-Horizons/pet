@@ -58,7 +58,7 @@ public class PetController {
             @Parameter(
                     description = "Конец интервала возраста в месяцах включительно",
                     example = "15")
-            @RequestParam(required = false) Integer endIntervalAge,
+            @RequestParam(required = false) Integer maxAgeInMonths,
             @Parameter(
                     description = "id=1 - С ограниченными возможностями, id=2 - Требуется лечение, id=3 - Хорошее",
                     example = "3")
@@ -83,7 +83,7 @@ public class PetController {
                 .petTypeId(petTypeId)
                 .genderId(genderId)
                 .minAgeInMonths(minAgeInMonths)
-                .maxAgeInMonths(minAgeInMonths)
+                .maxAgeInMonths(maxAgeInMonths)
                 .healthId(healthId)
                 .hairId(hairId)
                 .breed(breed)
