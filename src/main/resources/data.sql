@@ -1,5 +1,5 @@
-INSERT INTO gender (name) VALUES ('Мужской') ON CONFLICT (name) DO NOTHING;
-INSERT INTO gender (name) VALUES ('Женский') ON CONFLICT (name) DO NOTHING;
+INSERT INTO gender (name) VALUES ('Мальчик') ON CONFLICT (name) DO NOTHING;
+INSERT INTO gender (name) VALUES ('Девочка') ON CONFLICT (name) DO NOTHING;
 
 
 INSERT INTO color (name) VALUES ('Блондин') ON CONFLICT (name) DO NOTHING;
