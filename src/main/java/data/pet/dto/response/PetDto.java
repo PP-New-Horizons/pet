@@ -12,9 +12,9 @@ import java.util.List;
 public class PetDto {
     private Long id;
 
-    private byte[] avatar;
+    private String pathToAvatar;
 
-    private List<byte[]> gallery;
+    private List<String> pathsToGallery;
 
     private String name;
 
