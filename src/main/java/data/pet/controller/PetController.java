@@ -2,9 +2,12 @@ package data.pet.controller;
 
 import data.pet.dto.request.PetFilterDto;
 import data.pet.dto.response.PetDto;
+import data.pet.exception.NotFoundPetException;
 import data.pet.services.interfaces.PetService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,23 +27,31 @@ public class PetController {
 
     @GetMapping
     @Operation(summary = "Get a list of all pets")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "List of pets received")})
     public ResponseEntity<List<PetDto>> getAllPets() {
         return ResponseEntity.status(HttpStatus.OK).body(petService.getAllPets());
     }
 
     @GetMapping("/cats")
     @Operation(summary = "Get a list of all cats")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "List of cats received")})
     public ResponseEntity<List<PetDto>> getAllCats() {
         return ResponseEntity.status(HttpStatus.OK).body(petService.getPetsByTypeId(1L));
     }
 
     @GetMapping("/dogs")
     @Operation(summary = "Get a list of all dogs")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "List of dogs received")})
     public ResponseEntity<List<PetDto>> getAllDogs() {
         return ResponseEntity.status(HttpStatus.OK).body(petService.getPetsByTypeId(2L));
     }
 
     @GetMapping("/filter")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "List of filtered pets received")})
     @Operation(summary = "Get a list of pets by filter")
     public ResponseEntity<List<PetDto>> getPetsByFilters(
             @Parameter(
@@ -95,9 +106,15 @@ public class PetController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Get a pet by id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Pet received"),
+            @ApiResponse(responseCode = "404", description = "Pet is not found")})
     public ResponseEntity<PetDto> getPetById(
             @PathVariable Long id
     ) {
+        if (petService.getPetById(id).isEmpty()) {
+            throw new NotFoundPetException(String.format("Pet with id %d is not found", id));
+        }
         return ResponseEntity.status(HttpStatus.OK).body(petService.getPetById(id).get());
     }
 }
