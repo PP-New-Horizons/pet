@@ -17,7 +17,7 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-//    @Size(min=2, max=30)
+//    @PetSize(min=2, max=30)
 //    @NotNull
     @Column(columnDefinition = "VARCHAR",name = "user_name", length = 100)
     private String name;
