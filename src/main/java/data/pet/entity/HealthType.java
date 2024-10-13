@@ -17,7 +17,7 @@ public class HealthType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Не состояние здоровья")
+//    @NotBlank(message = "Не состояние здоровья")
     @Column(unique = true, nullable = false)
     @EqualsAndHashCode.Include
     private String name;

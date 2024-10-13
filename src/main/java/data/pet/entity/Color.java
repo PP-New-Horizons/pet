@@ -17,7 +17,7 @@ public class Color {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Не выбран цвет")
+//    @NotBlank(message = "Не выбран цвет")
     @Column(unique = true, nullable = false)
     @EqualsAndHashCode.Include
     private String name;

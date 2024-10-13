@@ -17,7 +17,7 @@ public class PetType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Не указан вид")
+//    @NotBlank(message = "Не указан вид")
     @Column(unique = true, nullable = false)
     @EqualsAndHashCode.Include
     private String name;

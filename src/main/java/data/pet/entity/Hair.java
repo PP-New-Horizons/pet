@@ -17,7 +17,7 @@ public class Hair {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Не указан цвет")
+//    @NotBlank(message = "Не указан цвет")
     @Column(unique = true, nullable = false)
     @EqualsAndHashCode.Include
     private String name;

@@ -17,7 +17,7 @@ public class PetSize {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Не указан размер")
+//    @NotBlank(message = "Не указан размер")
     @Column(unique = true, nullable = false)
     @EqualsAndHashCode.Include
     private String name;

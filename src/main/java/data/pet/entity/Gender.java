@@ -17,7 +17,7 @@ public class Gender {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Не выбран пол")
+//    @NotNull(message = "Не выбран пол")
     @Column(unique = true, nullable = false)
     @EqualsAndHashCode.Include
     private String name;
