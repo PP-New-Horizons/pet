@@ -24,4 +24,4 @@ INSERT INTO size (name) VALUES ('Маленький') ON CONFLICT (name) DO NOTH
 INSERT INTO pet_type (name) VALUES ('Кошка') ON CONFLICT (name) DO NOTHING;
 INSERT INTO pet_type (name) VALUES ('Собака') ON CONFLICT (name) DO NOTHING;
 
-INSERT INTO pet(name,) VALUES ('Собака') ON CONFLICT (name) DO NOTHING;
+--INSERT INTO pet(name) VALUES ('Собака') ON CONFLICT (name) DO NOTHING;

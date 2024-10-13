@@ -31,7 +31,7 @@ public class Pet {
 //            regexp = "^(?:[А-Яа-яЁё]{2,25}|[А-Яа-яЁё]{1,24}(-[А-Яа-яЁё]{1,24})+)$")
 //    @Length(min = 2)
     @Column(columnDefinition = "VARCHAR", name = "name")
-    @ManyToOne
+//    @ManyToOne
     String name;
 
 //    @Valid

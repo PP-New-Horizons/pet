@@ -9,7 +9,6 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -27,6 +26,7 @@ import java.util.List;
 @RequestMapping("/api/pets")
 @RequiredArgsConstructor
 @Slf4j
+@Validated
 public class PetController {
     private final PetService petService;
 
@@ -54,26 +54,26 @@ public class PetController {
         return ResponseEntity.status(HttpStatus.OK).body(petService.getPetsByTypeId(2L));
     }
 
-    @Validated
+//    @Validated
     @GetMapping("/filter")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "List of filtered pets received")})
     @Operation(summary = "Get a list of pets by filter")
     public ResponseEntity<List<PetDto>> getPetsByFilters(
-            @Parameter(
+             @Parameter(
                     description = "id=1 - Кошка, id=2 - Собака",
                     example = "1")
             @RequestParam(required = false)
             @Min(value = 1,message = "Минимальное petTypeId значение 1")
-            @Max(value = 2,message = "Максимально petTypeId значение 2")
-            Integer petTypeId,
+//            @Max(value = 2,message = "Максимально petTypeId значение 2")
+             Integer petTypeId,
 
             @Parameter(
                     description = "id=1 - Мужской, id=2 - Женский",
                     example = "1")
             @RequestParam(required = false)
             @Min(value = 1,message = "Минимальное genderId значение 1")
-            @Max(value = 2,message = "Максимально genderId значение 2")
+//            @Max(value = 2,message = "Максимально genderId значение 2")
             Integer genderId,
 
             @Parameter(
@@ -96,7 +96,7 @@ public class PetController {
                     example = "3")
             @RequestParam(required = false)
             @Min(value = 1,message = "Минимальное healthId значение 1")
-            @Max(value = 3,message = "Максимально healthId значение 3")
+//            @Max(value = 3,message = "Максимально healthId значение 3")
             Integer healthId,
 
             @Parameter(
@@ -104,7 +104,7 @@ public class PetController {
                     example = "1")
             @RequestParam(required = false)
             @Min(value = 1,message = "Минимальное hairId значение 1")
-            @Max(value = 3,message = "Максимально hairId значение 3")
+//            @Max(value = 3,message = "Максимально hairId значение 3")
             Integer hairId,
 
             @Parameter(
@@ -117,7 +117,7 @@ public class PetController {
                     example = "1")
             @RequestParam(required = false)
             @Min(value = 1,message = "Минимальное colorId значение 1")
-            @Max(value = 5,message = "Максимально colorId значение 5")
+//            @Max(value = 5,message = "Максимально colorId значение 5")
             Integer colorId,
 
             @Parameter(
@@ -125,7 +125,7 @@ public class PetController {
                     example = "1")
             @RequestParam(required = false)
             @Min(value = 1,message = "Минимальное значение sizeId 1")
-            @Max(value = 3,message = "Максимально значение sizeId 3")
+//            @Max(value = 3,message = "Максимально значение sizeId 3")
             Integer sizeId) {
         PetFilterDto petFilterDto = PetFilterDto.builder()
                 .petTypeId(petTypeId)
@@ -147,7 +147,7 @@ public class PetController {
             @ApiResponse(responseCode = "200", description = "Pet received"),
             @ApiResponse(responseCode = "404", description = "Pet is not found")})
     public ResponseEntity<PetDto> getPetById(
-            @PathVariable Long id
+            @Min(value = 1) @PathVariable Long id
     ) {
         if (petService.getPetById(id).isEmpty()) {
             throw new NotFoundPetException(String.format("Pet with id %d is not found", id));

@@ -23,18 +23,22 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(data, HttpStatus.NOT_FOUND);
     }
 
-    //MethodArgumentNotValidException ConstraintViolationException
+
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<Map<String, String>> handleConstraintViolationException(ConstraintViolationException ex) {
         Map<String, String> errors = new HashMap<>();
         ex.getConstraintViolations().forEach(violation -> {
             String fieldName = violation.getPropertyPath().toString();
-            String errorMessage = violation.getMessage();
+            String[] pathParts = fieldName.split("\\.");
+            fieldName = pathParts[pathParts.length - 1];
+            Object invalidValue = violation.getInvalidValue();
+            String errorMessage = String.format("Параметр '%s' некорректен: %s", invalidValue, violation.getMessage());
             errors.put(fieldName, errorMessage);
         });
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<Map<String, String>> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
@@ -46,4 +50,5 @@ public class GlobalExceptionHandler {
         });
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+
 }
