@@ -9,10 +9,14 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +26,7 @@ import java.util.List;
 @RequestMapping("/api/pets")
 @RequiredArgsConstructor
 @Slf4j
+@Validated
 public class PetController {
     private final PetService petService;
 
@@ -49,47 +54,79 @@ public class PetController {
         return ResponseEntity.status(HttpStatus.OK).body(petService.getPetsByTypeId(2L));
     }
 
+//    @Validated
     @GetMapping("/filter")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "List of filtered pets received")})
     @Operation(summary = "Get a list of pets by filter")
     public ResponseEntity<List<PetDto>> getPetsByFilters(
-            @Parameter(
+             @Parameter(
                     description = "id=1 - Кошка, id=2 - Собака",
                     example = "1")
-            @RequestParam(required = false) Integer petTypeId,
+            @RequestParam(required = false)
+            @Min(value = 1,message = "Минимальное petTypeId значение 1")
+//            @Max(value = 2,message = "Максимально petTypeId значение 2")
+             Integer petTypeId,
+
             @Parameter(
                     description = "id=1 - Мужской, id=2 - Женский",
                     example = "1")
-            @RequestParam(required = false) Integer genderId,
+            @RequestParam(required = false)
+            @Min(value = 1,message = "Минимальное genderId значение 1")
+//            @Max(value = 2,message = "Максимально genderId значение 2")
+            Integer genderId,
+
             @Parameter(
                     description = "Начало интервала возраста в месяцах включительно",
                     example = "0")
-            @RequestParam(required = false) Integer minAgeInMonths,
+            @RequestParam(required = false)
+            @PositiveOrZero(message = "minAgeInMonths - должно быть ноль или положительное число")
+            Integer minAgeInMonths,
+
             @Parameter(
                     description = "Конец интервала возраста в месяцах включительно",
                     example = "15")
-            @RequestParam(required = false) Integer maxAgeInMonths,
+            @RequestParam(required = false)
+            @Positive(message = "maxAgeInMonths - должно быть положительное число")
+            @Min(value = 0, message = "maxAgeInMonths - должно быть не отрицательное число")
+            Integer maxAgeInMonths,
+
             @Parameter(
                     description = "id=1 - С ограниченными возможностями, id=2 - Требуется лечение, id=3 - Хорошее",
                     example = "3")
-            @RequestParam(required = false) Integer healthId,
+            @RequestParam(required = false)
+            @Min(value = 1,message = "Минимальное healthId значение 1")
+//            @Max(value = 3,message = "Максимально healthId значение 3")
+            Integer healthId,
+
             @Parameter(
-                    description = "id=1 - Блондин, id=2 - Брюнет, id=3 - Рыжий, id=4 - Шатен, id=5 - Пестрый",
+                    description = "id=1 - Гладкошерстный, id=2 - Длинношерстный, id=3 - Лысый",
                     example = "1")
-            @RequestParam(required = false) Integer hairId,
+            @RequestParam(required = false)
+            @Min(value = 1,message = "Минимальное hairId значение 1")
+//            @Max(value = 3,message = "Максимально hairId значение 3")
+            Integer hairId,
+
             @Parameter(
                     description = "Порода, true - есть, false - нет",
                     example = "false")
             @RequestParam(required = false) Boolean breed,
+
             @Parameter(
-                    description = "id=1 - Брюнет, id=2 - Рыжий, id=3 - Шатен, id=4 - Пёстрый",
+                    description = "id=1 - Блондин, id=2 - Брюнет, id=3 - Рыжий, id=4 - Шатен, id=5 - Пестрый",
                     example = "1")
-            @RequestParam(required = false) Integer colorId,
+            @RequestParam(required = false)
+            @Min(value = 1,message = "Минимальное colorId значение 1")
+//            @Max(value = 5,message = "Максимально colorId значение 5")
+            Integer colorId,
+
             @Parameter(
                     description = "id=1 - Большой, id=2 - Средний, id=3 - Маленький",
                     example = "1")
-            @RequestParam(required = false) Integer sizeId) {
+            @RequestParam(required = false)
+            @Min(value = 1,message = "Минимальное значение sizeId 1")
+//            @Max(value = 3,message = "Максимально значение sizeId 3")
+            Integer sizeId) {
         PetFilterDto petFilterDto = PetFilterDto.builder()
                 .petTypeId(petTypeId)
                 .genderId(genderId)
@@ -110,7 +147,7 @@ public class PetController {
             @ApiResponse(responseCode = "200", description = "Pet received"),
             @ApiResponse(responseCode = "404", description = "Pet is not found")})
     public ResponseEntity<PetDto> getPetById(
-            @PathVariable Long id
+            @Min(value = 1) @PathVariable Long id
     ) {
         if (petService.getPetById(id).isEmpty()) {
             throw new NotFoundPetException(String.format("Pet with id %d is not found", id));

@@ -2,6 +2,7 @@ package data.pet.services.implementations;
 
 import data.pet.dto.request.PetFilterDto;
 import data.pet.dto.response.PetDto;
+import data.pet.entity.Hair;
 import data.pet.entity.Pet;
 import data.pet.repository.PetRepo;
 import data.pet.services.interfaces.ImageService;
