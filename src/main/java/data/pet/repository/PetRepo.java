@@ -32,7 +32,7 @@ public interface PetRepo extends JpaRepository<Pet, Long> {
             "(:breed IS NULL OR p.breed = :breed) AND " +
             "(:hairId IS NULL OR p.hair.id = :hairId) AND " +
             "(:color IS NULL OR p.color.id = :color) AND " +
-            "(:sizeId IS NULL OR p.size.id = :sizeId) AND " +
+            "(:sizeId IS NULL OR p.petSize.id = :sizeId) AND " +
             "p.isBooked = false AND p.isAdopted = false")
     List<Pet> findPetsByFilters(@Param("petTypeId") Integer petTypeId,
                                 @Param("genderId") Integer genderId,

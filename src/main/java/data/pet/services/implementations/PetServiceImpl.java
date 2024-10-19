@@ -70,7 +70,7 @@ public class PetServiceImpl implements PetService {
         petDto.setPetType(pet.getPetTypeId().getName());
         petDto.setColor(pet.getColor().getName());
         petDto.setHair(pet.getHair().getName());
-        petDto.setSize(pet.getSize().getName());
+        petDto.setSize(pet.getPetSize().getName());
         petDto.setPathToAvatar(imageService.getImages(pet.getImages(), true).stream().findFirst().orElse(null));
         petDto.setPathsToGallery(imageService.getImages(pet.getImages(), false));
         return petDto;
