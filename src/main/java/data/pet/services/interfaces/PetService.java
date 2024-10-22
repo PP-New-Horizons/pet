@@ -8,9 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PetService {
-    List<PetDto> getAllPets();
+    List<PetDto> getAllPetsForUser();
     List<PetDto> getAllPetsForAdmin();
-    List<PetDto> getPetsByTypeId(Long typeId);
-    List<PetDto> getPetsByFilter(PetFilterDto petFilterDto);
-    Optional<PetDto> getPetById(Long id);
+    List<PetDto> getPetsByTypeIdForUser(Long typeId);
+    List<PetDto> getPetsByFilterForUser(PetFilterDto petFilterDto);
+    Optional<PetDto> getPetDtoByIdForUser(Long id);
+    Optional<Pet> getPetById(Long petId);
+    void updateBookStatusPet(Pet pet, boolean isBooked);
 }

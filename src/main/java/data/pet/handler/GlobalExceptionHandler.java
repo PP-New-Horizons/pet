@@ -1,7 +1,11 @@
 package data.pet.handler;
 
+import data.pet.data.PetAdoptedData;
+import data.pet.data.PetBookedData;
 import data.pet.data.PetNotFoundData;
 import data.pet.exception.NotFoundPetException;
+import data.pet.exception.PetAdoptedException;
+import data.pet.exception.PetBookedException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +25,20 @@ public class GlobalExceptionHandler {
         PetNotFoundData data = PetNotFoundData.builder()
                 .info(ex.getMessage()).build();
         return new ResponseEntity<>(data, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(PetBookedException.class)
+    public ResponseEntity<PetBookedData> handlePetBookedException(PetBookedException ex) {
+        PetBookedData data = PetBookedData.builder()
+                .info(ex.getMessage()).build();
+        return new ResponseEntity<>(data, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(PetAdoptedException.class)
+    public ResponseEntity<PetAdoptedData> handlePetAdoptedException(PetAdoptedException ex) {
+        PetAdoptedData data = PetAdoptedData.builder()
+                .info(ex.getMessage()).build();
+        return new ResponseEntity<>(data, HttpStatus.CONFLICT);
     }
 
 

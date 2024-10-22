@@ -2,7 +2,6 @@ package data.pet.services.implementations;
 
 import data.pet.dto.request.PetFilterDto;
 import data.pet.dto.response.PetDto;
-import data.pet.entity.Hair;
 import data.pet.entity.Pet;
 import data.pet.repository.PetRepo;
 import data.pet.services.interfaces.ImageService;
@@ -28,8 +27,8 @@ public class PetServiceImpl implements PetService {
     EntityManager entityManager;
 
     @Override
-    public List<PetDto> getAllPets() {
-        return petRepo.findByIsBookedFalseAndIsAdoptedFalse().stream()
+    public List<PetDto> getAllPetsForUser() {
+        return petRepo.findAllIsBookedFalseAndIsAdoptedFalse().stream()
                 .map(this::mapPetToDto)
                 .collect(Collectors.toList());
     }
@@ -42,16 +41,27 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public List<PetDto> getPetsByTypeId(Long typeId) {
-        return petRepo.findAllPetsByTypeId(typeId).stream()
+    public List<PetDto> getPetsByTypeIdForUser(Long typeId) {
+        return petRepo.findAllByPetTypeIdAndIsBookedFalseAndIsAdoptedFalse(typeId).stream()
                 .map(this::mapPetToDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Optional<PetDto> getPetById(Long petId) {
+    public Optional<PetDto> getPetDtoByIdForUser(Long petId) {
         return petRepo.findById(petId)
                 .map(this::mapPetToDto);
+    }
+
+    @Override
+    public Optional<Pet> getPetById(Long petId) {
+        return petRepo.findById(petId);
+    }
+
+    @Override
+    public void updateBookStatusPet(Pet pet, boolean isBooked) {
+        pet.setBooked(isBooked);
+        petRepo.save(pet);
     }
 
     private PetDto mapPetToDto(Pet pet) {
@@ -81,7 +91,7 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public List<PetDto> getPetsByFilter(PetFilterDto petFilter) {
+    public List<PetDto> getPetsByFilterForUser(PetFilterDto petFilter) {
         LocalDate maxBirthDate = calculateBirthDateFromAgeInMonths(petFilter.getMinAgeInMonths());
         LocalDate minBirthDate = calculateBirthDateFromAgeInMonths(petFilter.getMaxAgeInMonths());
         if (maxBirthDate == null) {
