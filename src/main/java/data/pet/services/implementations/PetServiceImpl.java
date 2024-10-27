@@ -15,7 +15,6 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -30,21 +29,21 @@ public class PetServiceImpl implements PetService {
     public List<PetDto> getAllPetsForUser() {
         return petRepo.findAllIsBookedFalseAndIsAdoptedFalse().stream()
                 .map(this::mapPetToDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
     public List<PetDto> getAllPetsForAdmin() {
         return petRepo.findAll().stream()
                 .map(this::mapPetToDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
     public List<PetDto> getPetsByTypeIdForUser(Long typeId) {
         return petRepo.findAllByPetTypeIdAndIsBookedFalseAndIsAdoptedFalse(typeId).stream()
                 .map(this::mapPetToDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -113,7 +112,7 @@ public class PetServiceImpl implements PetService {
                         petFilter.getSizeId()
                 ).stream()
                 .map(this::mapPetToDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private LocalDate calculateBirthDateFromAgeInMonths(Integer ageInMonths) {

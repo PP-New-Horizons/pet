@@ -68,7 +68,6 @@ public class PetController {
                     example = "1")
             @RequestParam(required = false)
             @Min(value = 1,message = "Минимальное petTypeId значение 1")
-//            @Max(value = 2,message = "Максимально petTypeId значение 2")
              Integer petTypeId,
 
             @Parameter(
@@ -76,7 +75,6 @@ public class PetController {
                     example = "1")
             @RequestParam(required = false)
             @Min(value = 1,message = "Минимальное genderId значение 1")
-//            @Max(value = 2,message = "Максимально genderId значение 2")
             Integer genderId,
 
             @Parameter(
@@ -95,11 +93,10 @@ public class PetController {
             Integer maxAgeInMonths,
 
             @Parameter(
-                    description = "id=1 - С ограниченными возможностями, id=2 - Требуется лечение, id=3 - Хорошее",
+                    description = "id=1 - С особенностями, id=2 - Требуется лечение, id=3 - Здоровые",
                     example = "3")
             @RequestParam(required = false)
             @Min(value = 1,message = "Минимальное healthId значение 1")
-//            @Max(value = 3,message = "Максимально healthId значение 3")
             Integer healthId,
 
             @Parameter(
@@ -107,7 +104,6 @@ public class PetController {
                     example = "1")
             @RequestParam(required = false)
             @Min(value = 1,message = "Минимальное hairId значение 1")
-//            @Max(value = 3,message = "Максимально hairId значение 3")
             Integer hairId,
 
             @Parameter(
@@ -120,7 +116,6 @@ public class PetController {
                     example = "1")
             @RequestParam(required = false)
             @Min(value = 1,message = "Минимальное colorId значение 1")
-//            @Max(value = 5,message = "Максимально colorId значение 5")
             Integer colorId,
 
             @Parameter(
@@ -128,7 +123,6 @@ public class PetController {
                     example = "1")
             @RequestParam(required = false)
             @Min(value = 1,message = "Минимальное значение sizeId 1")
-//            @Max(value = 3,message = "Максимально значение sizeId 3")
             Integer sizeId) {
         PetFilterDto petFilterDto = PetFilterDto.builder()
                 .petTypeId(petTypeId)

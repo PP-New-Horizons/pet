@@ -9,9 +9,9 @@ INSERT INTO color (name) VALUES ('Шатен') ON CONFLICT (name) DO NOTHING;
 INSERT INTO color (name) VALUES ('Пёстрый') ON CONFLICT (name) DO NOTHING;
 
 
-INSERT INTO health_type (name) VALUES ('С ограниченными возможностями') ON CONFLICT (name) DO NOTHING;
+INSERT INTO health_type (name) VALUES ('С особенностями') ON CONFLICT (name) DO NOTHING;
 INSERT INTO health_type (name) VALUES ('Требуется лечение') ON CONFLICT (name) DO NOTHING;
-INSERT INTO health_type (name) VALUES ('Хорошее') ON CONFLICT (name) DO NOTHING;
+INSERT INTO health_type (name) VALUES ('Здоровые') ON CONFLICT (name) DO NOTHING;
 
 INSERT INTO hair (name) VALUES ('Гладкошерстный') ON CONFLICT (name) DO NOTHING;
 INSERT INTO hair (name) VALUES ('Длинношерстный') ON CONFLICT (name) DO NOTHING;

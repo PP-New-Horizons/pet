@@ -1,7 +1,6 @@
 package data.pet.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @NoArgsConstructor
@@ -17,7 +16,6 @@ public class Gender {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @NotNull(message = "Не выбран пол")
     @Column(unique = true, nullable = false)
     @EqualsAndHashCode.Include
     private String name;
