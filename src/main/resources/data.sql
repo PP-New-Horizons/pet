@@ -28,8 +28,8 @@ INSERT INTO pet_type (name) VALUES ('Собака') ON CONFLICT (name) DO NOTHIN
 
 -- Test data
 -- Плюшик
-INSERT INTO pet (breed, created_at, date_of_birth, description, history, is_adopted, is_booked, name, color_id, gender_id, hair_id, health_type, size_id, pet_type_id)
-SELECT true, '2016-06-25 19:10:25', '2024-06-25', 'Любитель поспать в любое время суток', 'Это история', false, false, 'Сплюшик', 1, 1, 2, 3, 1, 1
+INSERT INTO pet (breed, created_at, date_of_birth, description, history, is_adopted, is_booked, name, color_id, gender_id, hair_id, health_type, pet_type_id)
+SELECT true, '2016-06-25 19:10:25', '2024-06-25', 'Любитель поспать в любое время суток', 'Это история', false, false, 'Сплюшик', 5, 1, 2, 3, 1
 WHERE NOT EXISTS (SELECT 1 FROM pet WHERE name = 'Сплюшик');
 
 
@@ -41,8 +41,8 @@ WHERE pet.name = 'Сплюшик' AND NOT EXISTS (
 );
 
 -- Изумруд
-INSERT INTO pet (breed, created_at, date_of_birth, description, history, is_adopted, is_booked, name, color_id, gender_id, hair_id, health_type, size_id, pet_type_id)
-SELECT true, '2016-06-25 19:10:25', '2024-06-25', 'Пронзительный взгляд, покоряющий сердца', 'Это история', false, false, 'Изумруд', 1, 1, 2, 3, 1, 1
+INSERT INTO pet (breed, created_at, date_of_birth, description, history, is_adopted, is_booked, name, color_id, gender_id, hair_id, health_type, pet_type_id)
+SELECT true, '2016-06-25 19:10:25', '2023-06-25', 'Пронзительный взгляд, покоряющий сердца', 'Это история', false, false, 'Изумруд', 2, 1, 2, 2, 1
 WHERE NOT EXISTS (SELECT 1 FROM pet WHERE name = 'Изумруд');
 
 INSERT INTO image (is_avatar, name, path, pet_id)
@@ -53,8 +53,8 @@ WHERE pet.name = 'Изумруд' AND NOT EXISTS (
 );
 
 -- Бука
-INSERT INTO pet (breed, created_at, date_of_birth, description, history, is_adopted, is_booked, name, color_id, gender_id, hair_id, health_type, size_id, pet_type_id)
-SELECT true, '2016-06-25 19:10:25', '2024-06-25', 'Строгая мордочка, но ласковая душа', 'Это история', false, false, 'Бука', 1, 2, 2, 3, 1, 1
+INSERT INTO pet (breed, created_at, date_of_birth, description, history, is_adopted, is_booked, name, color_id, gender_id, hair_id, health_type, pet_type_id)
+SELECT true, '2016-06-25 19:10:25', '2021-06-25', 'Строгая мордочка, но ласковая душа', 'Это история', false, false, 'Бука', 3, 2, 1, 1, 1
 WHERE NOT EXISTS (SELECT 1 FROM pet WHERE name = 'Бука');
 
 INSERT INTO image (is_avatar, name, path, pet_id)
@@ -65,8 +65,8 @@ WHERE pet.name = 'Бука' AND NOT EXISTS (
 );
 
 -- Фотон
-INSERT INTO pet (breed, created_at, date_of_birth, description, history, is_adopted, is_booked, name, color_id, gender_id, hair_id, health_type, size_id, pet_type_id)
-SELECT true, '2016-06-25 19:10:25', '2024-06-25', 'Самый быстрый кот, которого Вы только видели', 'Это история', false, false, 'Фотон', 1, 1, 2, 3, 1, 1
+INSERT INTO pet (breed, created_at, date_of_birth, description, history, is_adopted, is_booked, name, color_id, gender_id, hair_id, health_type,  pet_type_id)
+SELECT true, '2016-06-25 19:10:25', '2024-03-25', 'Самый быстрый кот, которого Вы только видели', 'Это история', false, false, 'Фотон', 4, 2, 2, 2, 1
 WHERE NOT EXISTS (SELECT 1 FROM pet WHERE name = 'Фотон');
 
 INSERT INTO image (is_avatar, name, path, pet_id)
@@ -77,8 +77,8 @@ WHERE pet.name = 'Фотон' AND NOT EXISTS (
 );
 
 -- Хлоя
-INSERT INTO pet (breed, created_at, date_of_birth, description, history, is_adopted, is_booked, name, color_id, gender_id, hair_id, health_type, size_id, pet_type_id)
-SELECT true, '2016-06-25 19:10:25', '2024-06-25', 'Нежная и спокойная кошечка', 'Это история', false, false, 'Хлоя', 1, 2, 2, 3, 1, 1
+INSERT INTO pet (breed, created_at, date_of_birth, description, history, is_adopted, is_booked, name, color_id, gender_id, hair_id, health_type,  pet_type_id)
+SELECT false, '2016-06-25 19:10:25', '2013-06-25', 'Нежная и спокойная кошечка', 'Это история', false, false, 'Хлоя', 3, 2, 1, 3, 1
 WHERE NOT EXISTS (SELECT 1 FROM pet WHERE name = 'Хлоя');
 
 INSERT INTO image (is_avatar, name, path, pet_id)
@@ -90,7 +90,7 @@ WHERE pet.name = 'Хлоя' AND NOT EXISTS (
 
 -- Баки
 INSERT INTO pet (breed, created_at, date_of_birth, description, history, is_adopted, is_booked, name, color_id, gender_id, hair_id, health_type, size_id, pet_type_id)
-SELECT true, '2016-06-25 19:10:25', '2024-06-25', 'С ним точно скучать не придётся', 'Это история', false, false, 'Баки', 1, 1, 2, 3, 1, 2
+SELECT false, '2016-06-25 19:10:25', '2014-10-25', 'С ним точно скучать не придётся', 'Это история', false, false, 'Баки', 1, 1, 2, 3, 2, 2
 WHERE NOT EXISTS (SELECT 1 FROM pet WHERE name = 'Баки');
 
 INSERT INTO image (is_avatar, name, path, pet_id)
@@ -102,7 +102,7 @@ WHERE pet.name = 'Баки' AND NOT EXISTS (
 
 -- Лола
 INSERT INTO pet (breed, created_at, date_of_birth, description, history, is_adopted, is_booked, name, color_id, gender_id, hair_id, health_type, size_id, pet_type_id)
-SELECT true, '2016-06-25 19:10:25', '2024-06-25', 'Самые маленькие лапки в нашем приюте', 'Это история', false, false, 'Лола', 1, 2, 2, 3, 1, 2
+SELECT true, '2016-06-25 19:10:25', '2021-01-25', 'Самые маленькие лапки в нашем приюте', 'Это история', false, false, 'Лола', 2, 2, 3, 3, 1, 2
 WHERE NOT EXISTS (SELECT 1 FROM pet WHERE name = 'Лола');
 
 INSERT INTO image (is_avatar, name, path, pet_id)
@@ -114,7 +114,7 @@ WHERE pet.name = 'Лола' AND NOT EXISTS (
 
 -- Майк
 INSERT INTO pet (breed, created_at, date_of_birth, description, history, is_adopted, is_booked, name, color_id, gender_id, hair_id, health_type, size_id, pet_type_id)
-SELECT true, '2016-06-25 19:10:25', '2024-06-25', 'Озорной пёс, который не знает устали', 'Это история', false, false, 'Майк', 1, 1, 2, 3, 1, 2
+SELECT false, '2016-06-25 19:10:25', '2015-01-25', 'Озорной пёс, который не знает устали', 'Это история', false, false, 'Майк', 4, 1, 3, 2, 1, 2
 WHERE NOT EXISTS (SELECT 1 FROM pet WHERE name = 'Майк');
 
 INSERT INTO image (is_avatar, name, path, pet_id)
@@ -126,7 +126,7 @@ WHERE pet.name = 'Майк' AND NOT EXISTS (
 
 -- Лика
 INSERT INTO pet (breed, created_at, date_of_birth, description, history, is_adopted, is_booked, name, color_id, gender_id, hair_id, health_type, size_id, pet_type_id)
-SELECT true, '2016-06-25 19:10:25', '2024-06-25', 'Самая добрая собака на целой планете', 'Это история', false, false, 'Лика', 1, 2, 2, 3, 1, 2
+SELECT false, '2016-06-25 19:10:25', '2018-06-25', 'Самая добрая собака на целой планете', 'Это история', false, false, 'Лика', 1, 2, 2, 3, 1, 2
 WHERE NOT EXISTS (SELECT 1 FROM pet WHERE name = 'Лика');
 
 INSERT INTO image (is_avatar, name, path, pet_id)
@@ -138,7 +138,7 @@ WHERE pet.name = 'Лика' AND NOT EXISTS (
 
 -- Брауни
 INSERT INTO pet (breed, created_at, date_of_birth, description, history, is_adopted, is_booked, name, color_id, gender_id, hair_id, health_type, size_id, pet_type_id)
-SELECT true, '2016-06-25 19:10:25', '2024-06-25', 'Ваш преданный друг и товарищ', 'Это история', false, false, 'Брауни', 1, 1, 2, 3, 1, 2
+SELECT true, '2016-06-25 19:10:25', '2023-06-25', 'Ваш преданный друг и товарищ', 'Это история', false, false, 'Брауни', 4, 1, 2, 2, 3, 2
 WHERE NOT EXISTS (SELECT 1 FROM pet WHERE name = 'Брауни');
 
 INSERT INTO image (is_avatar, name, path, pet_id)

@@ -71,7 +71,7 @@ public class PetServiceImpl implements PetService {
         petDto.setDescription(pet.getDescription());
         petDto.setHistory(pet.getHistory());
         petDto.setHealth(pet.getHealthType().getName());
-        petDto.setAllMonths(calculateAgeInMonths(pet.getDateOfBirth()));
+        petDto.setBirthDate(pet.getDateOfBirth());
         petDto.setCreatedDate(pet.getCreatedAt().toLocalDate().toString());
         petDto.setBooked(pet.isBooked());
         petDto.setAdopted(pet.isAdopted());
@@ -79,7 +79,7 @@ public class PetServiceImpl implements PetService {
         petDto.setPetType(pet.getPetTypeId().getName());
         petDto.setColor(pet.getColor().getName());
         petDto.setHair(pet.getHair().getName());
-        petDto.setSize(pet.getPetSize().getName());
+        petDto.setSize(pet.getPetSize() != null ? pet.getPetSize().getName() : null);
         petDto.setPathToAvatar(imageService.getImages(pet.getImages(), true).stream().findFirst().orElse(null));
         petDto.setPathsToGallery(imageService.getImages(pet.getImages(), false));
         return petDto;
