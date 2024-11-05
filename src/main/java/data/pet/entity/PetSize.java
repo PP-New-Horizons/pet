@@ -1,7 +1,6 @@
 package data.pet.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @NoArgsConstructor
@@ -17,7 +16,6 @@ public class PetSize {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @NotBlank(message = "Не указан размер")
     @Column(unique = true, nullable = false)
     @EqualsAndHashCode.Include
     private String name;

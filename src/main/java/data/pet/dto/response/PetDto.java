@@ -3,6 +3,7 @@ package data.pet.dto.response;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @NoArgsConstructor
@@ -34,7 +35,7 @@ public class PetDto {
     private String health;
 
     @NotBlank(message = "")
-    private Integer allMonths;
+    private LocalDate birthDate;
 
     @NotBlank(message = "")
     private String createdDate;

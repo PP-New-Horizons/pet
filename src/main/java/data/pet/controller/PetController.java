@@ -3,6 +3,8 @@ package data.pet.controller;
 import data.pet.dto.request.PetFilterDto;
 import data.pet.dto.response.PetDto;
 import data.pet.exception.NotFoundPetException;
+import data.pet.exception.PetAdoptedException;
+import data.pet.exception.PetBookedException;
 import data.pet.services.interfaces.PetService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -20,6 +22,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @Tag(name = "Pet", description = "Pet Api")
@@ -35,7 +38,7 @@ public class PetController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "List of pets received")})
     public ResponseEntity<List<PetDto>> getAllPets() {
-        return ResponseEntity.status(HttpStatus.OK).body(petService.getAllPets());
+        return ResponseEntity.status(HttpStatus.OK).body(petService.getAllPetsForUser());
     }
 
     @GetMapping("/cats")
@@ -43,7 +46,7 @@ public class PetController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "List of cats received")})
     public ResponseEntity<List<PetDto>> getAllCats() {
-        return ResponseEntity.status(HttpStatus.OK).body(petService.getPetsByTypeId(1L));
+        return ResponseEntity.status(HttpStatus.OK).body(petService.getPetsByTypeIdForUser(1L));
     }
 
     @GetMapping("/dogs")
@@ -51,7 +54,7 @@ public class PetController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "List of dogs received")})
     public ResponseEntity<List<PetDto>> getAllDogs() {
-        return ResponseEntity.status(HttpStatus.OK).body(petService.getPetsByTypeId(2L));
+        return ResponseEntity.status(HttpStatus.OK).body(petService.getPetsByTypeIdForUser(2L));
     }
 
 //    @Validated
@@ -65,7 +68,6 @@ public class PetController {
                     example = "1")
             @RequestParam(required = false)
             @Min(value = 1,message = "Минимальное petTypeId значение 1")
-//            @Max(value = 2,message = "Максимально petTypeId значение 2")
              Integer petTypeId,
 
             @Parameter(
@@ -73,7 +75,6 @@ public class PetController {
                     example = "1")
             @RequestParam(required = false)
             @Min(value = 1,message = "Минимальное genderId значение 1")
-//            @Max(value = 2,message = "Максимально genderId значение 2")
             Integer genderId,
 
             @Parameter(
@@ -92,11 +93,10 @@ public class PetController {
             Integer maxAgeInMonths,
 
             @Parameter(
-                    description = "id=1 - С ограниченными возможностями, id=2 - Требуется лечение, id=3 - Хорошее",
+                    description = "id=1 - С особенностями, id=2 - Требуется лечение, id=3 - Здоровые",
                     example = "3")
             @RequestParam(required = false)
             @Min(value = 1,message = "Минимальное healthId значение 1")
-//            @Max(value = 3,message = "Максимально healthId значение 3")
             Integer healthId,
 
             @Parameter(
@@ -104,7 +104,6 @@ public class PetController {
                     example = "1")
             @RequestParam(required = false)
             @Min(value = 1,message = "Минимальное hairId значение 1")
-//            @Max(value = 3,message = "Максимально hairId значение 3")
             Integer hairId,
 
             @Parameter(
@@ -117,7 +116,6 @@ public class PetController {
                     example = "1")
             @RequestParam(required = false)
             @Min(value = 1,message = "Минимальное colorId значение 1")
-//            @Max(value = 5,message = "Максимально colorId значение 5")
             Integer colorId,
 
             @Parameter(
@@ -125,7 +123,6 @@ public class PetController {
                     example = "1")
             @RequestParam(required = false)
             @Min(value = 1,message = "Минимальное значение sizeId 1")
-//            @Max(value = 3,message = "Максимально значение sizeId 3")
             Integer sizeId) {
         PetFilterDto petFilterDto = PetFilterDto.builder()
                 .petTypeId(petTypeId)
@@ -138,20 +135,28 @@ public class PetController {
                 .color(colorId)
                 .sizeId(sizeId)
                 .build();
-        return ResponseEntity.status(HttpStatus.OK).body(petService.getPetsByFilter(petFilterDto));
+        return ResponseEntity.status(HttpStatus.OK).body(petService.getPetsByFilterForUser(petFilterDto));
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Get a pet by id")
+    @Operation(summary = "Get a pet by id for user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Pet received"),
             @ApiResponse(responseCode = "404", description = "Pet is not found")})
     public ResponseEntity<PetDto> getPetById(
             @Min(value = 1) @PathVariable Long id
     ) {
-        if (petService.getPetById(id).isEmpty()) {
+        Optional<PetDto> optionalPet = petService.getPetDtoByIdForUser(id);
+
+        if (optionalPet.isEmpty()) {
             throw new NotFoundPetException(String.format("Pet with id %d is not found", id));
         }
-        return ResponseEntity.status(HttpStatus.OK).body(petService.getPetById(id).get());
+        if (optionalPet.get().isBooked()) {
+            throw new PetBookedException(String.format("Pet with id %d is booked", id));
+        }
+        if (optionalPet.get().isAdopted()) {
+            throw new PetAdoptedException(String.format("Pet with id %d is adopted", id));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(optionalPet.get());
     }
 }
